@@ -18,7 +18,8 @@ Published at [panahovf.github.io/labour-monitor](https://panahovf.github.io/labo
   - `tile.json`: the few numbers the labour tile on the Monitor front page shows (headline, its change, the last three
     years for the small line, the release). Written by step 2.
   - `og.png`: the preview picture shown when the link is shared (made from `tools/og.html`, see below).
-- `.github/workflows/publish.yml`: updates the data every weekday and publishes the page (below).
+- `tools/released_today.py`: asks Statistics Canada whether any of the page's tables got new data today (below).
+- `.github/workflows/publish.yml`: updates the data on release days and publishes the page (below).
 
 ## Run it
 
@@ -41,9 +42,14 @@ to the Monitor front page (`/monitor/`) work only online.
 
 GitHub publishes the page (Settings → Pages → Source: GitHub Actions) with `.github/workflows/publish.yml`:
 
-- Every weekday at 13:45 and 17:15 UTC (Statistics Canada publishes at 8:30 Toronto time), it runs steps 1 and 2. If any
-  number changed, it commits the new `site/data/labour.json` and `site/tile.json` and publishes; otherwise it stops. If a
-  step fails, nothing changes and the page keeps its last good data.
+- Every weekday at 8:35 Toronto time (Statistics Canada publishes at 8:30), with a later try at 10:35, it first asks
+  Statistics Canada whether any of the page's tables got new data that day: `tools/released_today.py` reads the Web Data
+  Service's daily list of changed tables (`getChangedCubeList`) and compares it with `series.csv`. On a day with no
+  release it stops there, after a second or two. On a release day it runs steps 1 and 2; if any number changed, it
+  commits the new `site/data/labour.json` and `site/tile.json` and publishes. If a step fails, nothing changes and the
+  page keeps its last good data.
+- Every Saturday it runs steps 1 and 2 whatever the list says, as a safety net (a correction, or a release the check
+  missed).
 - On every push to `main`, it publishes `site/` as it is in the repository.
 - By hand: Actions tab → "Update and publish" → "Run workflow".
 

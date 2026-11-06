@@ -1,10 +1,12 @@
 # Updates the data and publishes the page (the site/ folder) to GitHub Pages: panahovf.github.io/labour-monitor/
 #
 # Runs:
-#   - every weekday at 13:45 and 17:15 UTC (8:45 and 12:15 in Toronto in winter, an hour later in summer; Statistics
-#     Canada publishes at 8:30): downloads the series (step 1), rebuilds the page's data (step 2) and, if any number
-#     changed, commits site/data/labour.json and site/tile.json and publishes;
-#   - by hand: Actions tab -> "Update and publish" -> "Run workflow" (same as the weekday runs, and always publishes);
+#   - every weekday at 8:35 Toronto time (Statistics Canada publishes at 8:30), with a later try at 10:35: first asks
+#     Statistics Canada whether any of the page's tables got new data today (tools/released_today.py, a second or
+#     two). Only if one did: downloads the series (step 1), rebuilds the page's data (step 2) and, if any number
+#     changed, commits site/data/labour.json and site/tile.json and publishes. Otherwise it stops there;
+#   - every Saturday: the full update whatever the list says, as a safety net (a release the check missed, a correction);
+#   - by hand: Actions tab -> "Update and publish" -> "Run workflow" (the full update, and always publishes);
 #   - whenever something is pushed to main: publishes site/ as it is in the repository, without downloading.
 #
 # A run that fails (a download error, or a check in step 2 that stops it) changes nothing: the page keeps its last good
@@ -14,8 +16,12 @@ name: Update and publish
 
 on:
   schedule:
-    - cron: "45 13 * * 1-5"
-    - cron: "15 17 * * 1-5"
+    # GitHub's schedule is in UTC: 8:35 Toronto is 13:35 UTC in winter and 12:35 UTC in summer, so both are here (the
+    # one an hour early finds nothing released yet and stops; the one an hour late finds the page already up to date)
+    - cron: "35 12 * * 1-5"
+    - cron: "35 13 * * 1-5"
+    - cron: "35 15 * * 1-5"      # 10:35 in winter, 11:35 in summer: in case GitHub started the first run late
+    - cron: "0 14 * * 6"         # Saturdays at 9:00 or 10:00: the full update, whatever the list says
   workflow_dispatch:
   push:
     branches: [main]
@@ -35,35 +41,49 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      UPDATE: ${{ github.event_name != 'push' }}    # download and rebuild on the weekday and by-hand runs only
     steps:
       - uses: actions/checkout@v4
 
+      # weekday runs: did Statistics Canada release any of the page's tables today?
+      - name: Has Statistics Canada released any of our tables today?
+        id: released
+        if: github.event_name == 'schedule' && github.event.schedule != '0 14 * * 6'
+        run: python3 tools/released_today.py
+
+      # update on Saturdays, by hand, or on a weekday with a release; a push only publishes
+      - name: Update or not
+        id: go
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then update=false
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event.schedule }}" = "0 14 * * 6" ]; then update=true
+          else update="${{ steps.released.outputs.released }}"; fi
+          echo "Update: $update"
+          echo "update=$update" >> "$GITHUB_OUTPUT"
+
       - uses: actions/setup-python@v5
-        if: env.UPDATE == 'true'
+        if: steps.go.outputs.update == 'true'
         with:
           python-version: "3.9"
           cache: pip
 
       - name: Install what the notebooks need
-        if: env.UPDATE == 'true'
+        if: steps.go.outputs.update == 'true'
         run: pip install -r requirements.txt
 
       - name: Download the Statistics Canada series (step 1)
-        if: env.UPDATE == 'true'
+        if: steps.go.outputs.update == 'true'
         working-directory: data
         run: jupyter nbconvert --to notebook --execute 01_fetch_statcan.ipynb --output-dir /tmp/runs --ExecutePreprocessor.timeout=600
 
       - name: Build the page's data (step 2)
-        if: env.UPDATE == 'true'
+        if: steps.go.outputs.update == 'true'
         working-directory: data
         run: jupyter nbconvert --to notebook --execute 02_build_labour.ipynb --output-dir /tmp/runs --ExecutePreprocessor.timeout=600
 
       # labour.json always gets a new "built_at" time; it counts as changed only if anything else in it changed.
       - name: Did any number change?
         id: check
-        if: env.UPDATE == 'true'
+        if: steps.go.outputs.update == 'true'
         run: |
           python - <<'EOF'
           import json, os, subprocess
