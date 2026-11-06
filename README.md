@@ -1,10 +1,10 @@
-# Labour Monitor
+# Nine to Five
 
 How healthy is Canada's labour market? Unemployment and what moved it, the provinces, jobs by industry, how hard it is to
 find work, and which age and education groups are worse off than usual. All from Statistics Canada, updated with every
 Labour Force Survey.
 
-Published at [panahovf.github.io/labour-monitor](https://panahovf.github.io/labour-monitor/), and one of the pages on
+Published at [panahovf.github.io/nine-to-five](https://panahovf.github.io/nine-to-five/), and one of the pages on
 [Monitor](https://panahovf.github.io/monitor/), part of [Farhad Panahov's website](https://panahovf.github.io).
 
 ## What's here
