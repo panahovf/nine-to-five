@@ -967,7 +967,9 @@ async function topicPage(root, topic) {
     ctl.append(b);
   }
 
-  document.getElementById("built").textContent = new Date(data.built_at.replace("Z", ":00Z")).toLocaleString(undefined,
+  // (when the page carries a "built" line: the time its data were built)
+  const built = document.getElementById("built");
+  if (built) built.textContent = new Date(data.built_at.replace("Z", ":00Z")).toLocaleString(undefined,
     { day: "numeric", month: "long", year: "numeric", hour: "numeric", minute: "2-digit" });
 
   drawAll();
