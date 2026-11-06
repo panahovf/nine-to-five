@@ -1,0 +1,12 @@
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Python environment and notebook checkpoints
+.venv/
+.ipynb_checkpoints/
+__pycache__/
+
+# Downloads: rebuilt by data/01_fetch_statcan.ipynb on every run
+data/store/

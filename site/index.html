@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Labour market · Monitor | Farhad Panahov</title>
+<meta name="description" content="How healthy is Canada's labour market? Unemployment, jobs, wages and who is feeling it, updated with every Labour Force Survey.">
+<link rel="canonical" href="https://panahovf.github.io/labour-monitor/">
+<!-- The preview card when the link is shared (LinkedIn, messages...); raise "?v=1" whenever the picture changes -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://panahovf.github.io/labour-monitor/">
+<meta property="og:title" content="How healthy is Canada's labour market?">
+<meta property="og:description" content="Unemployment, jobs and who is feeling it, updated with every Labour Force Survey from Statistics Canada.">
+<meta property="og:image" content="https://panahovf.github.io/labour-monitor/og.png?v=1">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- The portfolio's own stylesheet (fonts, colours, top bar, page head, footer), then the monitor's additions -->
+<link rel="stylesheet" href="https://panahovf.github.io/assets/css/style.css?v=4">
+<!-- ?v=: raise it whenever monitor.css / monitor.js change, so browsers fetch the new file instead of a cached copy -->
+<link rel="stylesheet" href="assets/monitor.css?v=2026-11-06c">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232148cc'/><text x='50' y='71' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%23ffffff'>F</text></svg>">
+</head>
+<body data-page="topic" data-topic="labour" data-root="">
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="dot"></span><span class="first"><a href="/monitor/" class="js-name">Monitor</a></span><a class="last by" href="https://panahovf.github.io/index.html">by Farhad Panahov</a>
+    </div>
+  </div>
+</header>
+
+<section class="pagehead">
+  <div class="wrap">
+    <a class="crumb" href="/monitor/">&larr; All topics</a>
+    <p class="label">Labour market</p>
+    <h1>How healthy is Canada's<br> <span class="accent">labour market?</span></h1>
+    <p>Unemployment, jobs, wages and who is feeling it.</p>
+    <p class="updated" id="updated">&nbsp;</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="tiles" id="tiles" aria-label="Where things stand"></div>
+
+  <section class="band-sm">
+    <h2 class="h2">What the latest release changed</h2>
+    <ul class="changes" id="changes"></ul>
+  </section>
+
+  <div class="controls">
+    <nav class="jump" id="jump" aria-label="Sections"></nav>
+    <div class="range" id="range" role="group" aria-label="Time range for line charts"></div>
+  </div>
+
+  <div id="groups"></div>
+
+  <section class="methods">
+    <details>
+      <summary><h2 class="open">How the numbers are made</h2></summary>
+      <div class="mbody">
+        <p><b>The data.</b> All from Statistics Canada, downloaded automatically through its Web Data Service; each chart links
+          to its table. Most series come from the Labour Force Survey (LFS), a monthly survey of about 65,000 households, and are
+          seasonally adjusted unless the chart says otherwise. Job vacancies come from the Job Vacancy and Wage Survey, published
+          about two months after the LFS.</p>
+        <p><b>Margin of error.</b> The LFS is a survey, so its monthly changes are estimates. This page calls a change
+          statistically significant when it is more than 1.645 standard errors (90% confidence), using the standard errors
+          Statistics Canada publishes. Statistics Canada&rsquo;s own releases use a looser 68% level, one standard error.</p>
+        <p><b>What moved the unemployment rate.</b> Since 1 &minus; the unemployment rate = employment &divide; (population &times;
+          participation rate), each change splits into a jobs part, a population part and a participation part (log changes,
+          scaled to percentage points; they add up to the actual change). Computed from the counts, not the rounded published
+          rates. The panel shows the change from the previous month, with its axis capped at &plusmn;1 point so that the pandemic
+          months don&rsquo;t flatten the rest.</p>
+        <p><b>Provinces.</b> &ldquo;3-mo trend&rdquo; is the average rate of the last three months minus the average of the three
+          months before (e.g. July&ndash;September against April&ndash;June). Provincial samples are small, so a single
+          month&rsquo;s change is noisy. The count at the top compares the published rates, to one decimal, with the month before.</p>
+        <p><b>Industries.</b> The margin of error for the year to date is not published. It is estimated from the published
+          monthly and 12-month margins: LFS households stay in the survey for six months, so the error of a change grows with the
+          gap between the two months until the samples stop overlapping. January uses the monthly margin, June onwards the
+          12-month margin, and the months in between a straight line in the variance (the squared error).</p>
+        <p><b>Who is unemployed.</b> Age and education groups come from table 14-10-0019 (not seasonally adjusted). Each
+          month&rsquo;s rate is computed from the counts, then averaged over 12 months, then ranked against every month since
+          January 2000, following Gad Levanon&rsquo;s <i>Labor Matters</i>. 45 to 54 is 25 to 54 minus 25 to 44; all ages (15 to
+          64) adds up 15 to 24, 25 to 54 and 55 to 64, counting a part Statistics Canada suppresses (fewer than 1,500 people) as
+          zero. Groups averaging under 10,000 unemployed are not shown. Percentiles are coloured in ten steps of ten (blue below
+          50, orange above), rates in five steps.</p>
+        <p><b>The sentences.</b> Written automatically from the numbers, by fixed rules. Page built <span id="built"></span>.</p>
+      </div>
+    </details>
+  </section>
+</div>
+
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="row2">
+      <div>
+        <div class="name">Farhad Panahov</div>
+        <div class="place">Economist &middot; Toronto, Canada</div>
+      </div>
+      <div class="social social--dark">
+        <a href="https://www.linkedin.com/in/panahov/" rel="me noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.5c0-1.3-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H9z"/></svg> LinkedIn</a>
+        <a href="https://github.com/panahovf" rel="me noopener noreferrer" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.1.82-.26.82-.58v-2.2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.96 0-1.32.47-2.39 1.24-3.23-.13-.3-.54-1.53.12-3.18 0 0 1.01-.33 3.3 1.23a11.5 11.5 0 0 1 6.01 0c2.29-1.56 3.3-1.23 3.3-1.23.66 1.65.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.23 0 4.63-2.8 5.65-5.48 5.95.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.58A12 12 0 0 0 12 .5z"/></svg> GitHub</a>
+        <a href="mailto:panahovf93@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v.3l-10 6-10-6zM2 8.1l9.47 5.68a1 1 0 0 0 1.06 0L22 8.1V18.5a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5z"/></svg> Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">&copy; 2026 Farhad Panahov. Views expressed here are my own. Data: Statistics Canada.</p>
+      <nav><a href="https://panahovf.github.io/index.html">Home</a><a href="https://panahovf.github.io/research.html">Research</a><a href="https://panahovf.github.io/cv.html">CV</a></nav>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.16/dist/plot.umd.min.js"></script>
+<script src="assets/monitor.js?v=2026-11-06c"></script>
+</body>
+</html>

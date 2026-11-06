@@ -1,0 +1,176 @@
+id,topic,source,table,vector,name,units,frequency,adjustment
+unemp_rate,labour,statcan,14-10-0287-01,2062815,"Unemployment rate, 15+",%,monthly,seasonally adjusted
+unemp_rate_15_24,labour,statcan,14-10-0287-01,2062842,"Unemployment rate, 15 to 24",%,monthly,seasonally adjusted
+unemp_rate_25_54,labour,statcan,14-10-0287-01,2062950,"Unemployment rate, 25 to 54",%,monthly,seasonally adjusted
+emp_rate_25_54,labour,statcan,14-10-0287-01,2062952,"Employment rate, 25 to 54",%,monthly,seasonally adjusted
+part_rate_25_54,labour,statcan,14-10-0287-01,2062951,"Participation rate, 25 to 54",%,monthly,seasonally adjusted
+emp_rate,labour,statcan,14-10-0287-01,2062817,"Employment rate, 15+",%,monthly,seasonally adjusted
+part_rate,labour,statcan,14-10-0287-01,2062816,"Participation rate, 15+",%,monthly,seasonally adjusted
+employment,labour,statcan,14-10-0287-01,2062811,"Employment, 15+",thousands,monthly,seasonally adjusted
+population,labour,statcan,14-10-0287-01,2062809,"Population, 15+",thousands,monthly,seasonally adjusted
+unemployment,labour,statcan,14-10-0287-01,2062814,"Unemployed people, 15+",thousands,monthly,seasonally adjusted
+fulltime,labour,statcan,14-10-0287-01,2062812,"Full-time employment, 15+",thousands,monthly,seasonally adjusted
+parttime,labour,statcan,14-10-0287-01,2062813,"Part-time employment, 15+",thousands,monthly,seasonally adjusted
+employment_se_mm,labour,statcan,14-10-0287-01,101884905,"Employment, standard error of the monthly change",thousands,monthly,seasonally adjusted
+unemp_rate_se_mm,labour,statcan,14-10-0287-01,101885193,"Unemployment rate, standard error of the monthly change",percentage points,monthly,seasonally adjusted
+ur_nl,labour,statcan,14-10-0287-01,2063004,"Unemployment rate, Newfoundland and Labrador",%,monthly,seasonally adjusted
+ur_pe,labour,statcan,14-10-0287-01,2063193,"Unemployment rate, Prince Edward Island",%,monthly,seasonally adjusted
+ur_ns,labour,statcan,14-10-0287-01,2063382,"Unemployment rate, Nova Scotia",%,monthly,seasonally adjusted
+ur_nb,labour,statcan,14-10-0287-01,2063571,"Unemployment rate, New Brunswick",%,monthly,seasonally adjusted
+ur_qc,labour,statcan,14-10-0287-01,2063760,"Unemployment rate, Quebec",%,monthly,seasonally adjusted
+ur_on,labour,statcan,14-10-0287-01,2063949,"Unemployment rate, Ontario",%,monthly,seasonally adjusted
+ur_mb,labour,statcan,14-10-0287-01,2064138,"Unemployment rate, Manitoba",%,monthly,seasonally adjusted
+ur_sk,labour,statcan,14-10-0287-01,2064327,"Unemployment rate, Saskatchewan",%,monthly,seasonally adjusted
+ur_ab,labour,statcan,14-10-0287-01,2064516,"Unemployment rate, Alberta",%,monthly,seasonally adjusted
+ur_bc,labour,statcan,14-10-0287-01,2064705,"Unemployment rate, British Columbia",%,monthly,seasonally adjusted
+emp_total,labour,statcan,14-10-0355-01,2057603,"Employment, all industries",thousands,monthly,seasonally adjusted
+emp_agri,labour,statcan,14-10-0355-01,2057605,Agriculture,thousands,monthly,seasonally adjusted
+emp_resources,labour,statcan,14-10-0355-01,2057606,"Forestry, fishing, mining, oil and gas",thousands,monthly,seasonally adjusted
+emp_utilities,labour,statcan,14-10-0355-01,2057607,Utilities,thousands,monthly,seasonally adjusted
+emp_construction,labour,statcan,14-10-0355-01,2057608,Construction,thousands,monthly,seasonally adjusted
+emp_manufacturing,labour,statcan,14-10-0355-01,2057609,Manufacturing,thousands,monthly,seasonally adjusted
+emp_wholesale,labour,statcan,14-10-0355-01,1643071240,Wholesale trade,thousands,monthly,seasonally adjusted
+emp_retail,labour,statcan,14-10-0355-01,1643071246,Retail trade,thousands,monthly,seasonally adjusted
+emp_transport,labour,statcan,14-10-0355-01,2057612,Transportation and warehousing,thousands,monthly,seasonally adjusted
+emp_finance,labour,statcan,14-10-0355-01,2057613,"Finance, insurance and real estate",thousands,monthly,seasonally adjusted
+emp_professional,labour,statcan,14-10-0355-01,2057614,"Professional, scientific and technical",thousands,monthly,seasonally adjusted
+emp_business_support,labour,statcan,14-10-0355-01,2057615,"Business, building and support services",thousands,monthly,seasonally adjusted
+emp_education,labour,statcan,14-10-0355-01,2057616,Education,thousands,monthly,seasonally adjusted
+emp_health,labour,statcan,14-10-0355-01,2057617,Health care and social assistance,thousands,monthly,seasonally adjusted
+emp_info_culture,labour,statcan,14-10-0355-01,2057618,"Information, culture and recreation",thousands,monthly,seasonally adjusted
+emp_accommodation_food,labour,statcan,14-10-0355-01,2057619,Accommodation and food services,thousands,monthly,seasonally adjusted
+emp_other_services,labour,statcan,14-10-0355-01,2057620,Other services,thousands,monthly,seasonally adjusted
+emp_public_admin,labour,statcan,14-10-0355-01,2057621,Public administration,thousands,monthly,seasonally adjusted
+emp_public,labour,statcan,14-10-0288-01,2066969,Public sector employees,thousands,monthly,seasonally adjusted
+emp_private,labour,statcan,14-10-0288-01,2066970,Private sector employees,thousands,monthly,seasonally adjusted
+emp_self,labour,statcan,14-10-0288-01,2066971,Self-employed,thousands,monthly,seasonally adjusted
+ltu_share,labour,statcan,14-10-0342-01,1078668606,"Share of unemployed looking 27 weeks or more",%,monthly,seasonally adjusted
+avg_weeks_unemployed,labour,statcan,14-10-0342-01,1078668390,Average weeks unemployed,weeks,monthly,seasonally adjusted
+wage_hourly,labour,statcan,14-10-0063-01,2132579,"Average hourly wage, all employees",dollars,monthly,not adjusted
+cpi,labour,statcan,18-10-0004-01,41690973,"Consumer Price Index, all items",2002=100,monthly,not adjusted
+vacancies,labour,statcan,14-10-0432-01,1481212145,Job vacancies,people,monthly,seasonally adjusted
+vacancy_rate,labour,statcan,14-10-0432-01,1481212147,Job vacancy rate,%,monthly,seasonally adjusted
+ur_recent_imm_25_54,labour,statcan,14-10-0471-01,1642846120,"Unemployment rate, immigrants landed 5 years or less, 25 to 54",%,monthly,"not adjusted, 3-month average"
+ur_all_imm_25_54,labour,statcan,14-10-0471-01,1642845280,"Unemployment rate, all immigrants, 25 to 54",%,monthly,"not adjusted, 3-month average"
+ur_born_25_54,labour,statcan,14-10-0471-01,1642848640,"Unemployment rate, born in Canada, 25 to 54",%,monthly,"not adjusted, 3-month average"
+unemp_rate_15_19,labour,statcan,14-10-0287-01,2062869,"Unemployment rate, 15 to 19",%,monthly,seasonally adjusted
+unemp_rate_20_24,labour,statcan,14-10-0287-01,2062896,"Unemployment rate, 20 to 24",%,monthly,seasonally adjusted
+unemp_rate_55_64,labour,statcan,14-10-0287-01,101885216,"Unemployment rate, 55 to 64",%,monthly,seasonally adjusted
+unemployed_all_dur,labour,statcan,14-10-0342-01,1078667526,"Unemployed people, all durations",thousands,monthly,seasonally adjusted
+unemployed_52w,labour,statcan,14-10-0342-01,1078668174,"Unemployed 52 weeks or more",thousands,monthly,seasonally adjusted
+occ_total,labour,statcan,14-10-0421-01,1490031158,"Employment, all occupations",thousands,monthly,not adjusted
+occ_management,labour,statcan,14-10-0421-01,1490031161,Management,thousands,monthly,not adjusted
+occ_business,labour,statcan,14-10-0421-01,1490031176,"Business, finance and administration",thousands,monthly,not adjusted
+occ_sciences,labour,statcan,14-10-0421-01,1490031197,Natural and applied sciences,thousands,monthly,not adjusted
+occ_health,labour,statcan,14-10-0421-01,1490031215,Health,thousands,monthly,not adjusted
+occ_education_law_gov,labour,statcan,14-10-0421-01,1490031236,"Education, law, social and government services",thousands,monthly,not adjusted
+occ_art_culture,labour,statcan,14-10-0421-01,1490031269,"Art, culture, recreation and sport",thousands,monthly,not adjusted
+occ_sales_service,labour,statcan,14-10-0421-01,1490031284,Sales and service,thousands,monthly,not adjusted
+occ_trades_transport,labour,statcan,14-10-0421-01,1490031299,"Trades, transport and equipment operators",thousands,monthly,not adjusted
+occ_natural_resources,labour,statcan,14-10-0421-01,1490031314,"Natural resources and agriculture",thousands,monthly,not adjusted
+occ_manufacturing_utilities,labour,statcan,14-10-0421-01,1490031323,Manufacturing and utilities,thousands,monthly,not adjusted
+productivity,labour,statcan,36-10-0206-01,1409153,"Labour productivity, business sector",2017=100,quarterly,seasonally adjusted
+comp_per_hour,labour,statcan,36-10-0206-01,1409158,"Total compensation per hour worked, business sector",2017=100,quarterly,seasonally adjusted
+unit_labour_cost,labour,statcan,36-10-0206-01,1409159,"Unit labour cost, business sector",2017=100,quarterly,seasonally adjusted
+hours_worked,labour,statcan,36-10-0206-01,1409155,"Hours worked, business sector",2017=100,quarterly,seasonally adjusted
+real_gdp_business,labour,statcan,36-10-0206-01,1409154,"Real GDP, business sector",2017=100,quarterly,seasonally adjusted
+edu_lf_all_15_24,labour,statcan,14-10-0019-01,2628028,"Labour force, all education levels, 15 to 24",thousands,monthly,not adjusted
+edu_lf_all_25_44,labour,statcan,14-10-0019-01,2628208,"Labour force, all education levels, 25 to 44",thousands,monthly,not adjusted
+edu_lf_all_25_54,labour,statcan,14-10-0019-01,2628388,"Labour force, all education levels, 25 to 54",thousands,monthly,not adjusted
+edu_lf_all_55_64,labour,statcan,14-10-0019-01,2628568,"Labour force, all education levels, 55 to 64",thousands,monthly,not adjusted
+edu_lf_0_8_15_24,labour,statcan,14-10-0019-01,2628029,"Labour force, 0 to 8 years of school, 15 to 24",thousands,monthly,not adjusted
+edu_lf_0_8_25_44,labour,statcan,14-10-0019-01,2628209,"Labour force, 0 to 8 years of school, 25 to 44",thousands,monthly,not adjusted
+edu_lf_0_8_25_54,labour,statcan,14-10-0019-01,2628389,"Labour force, 0 to 8 years of school, 25 to 54",thousands,monthly,not adjusted
+edu_lf_0_8_55_64,labour,statcan,14-10-0019-01,2628569,"Labour force, 0 to 8 years of school, 55 to 64",thousands,monthly,not adjusted
+edu_lf_somehs_15_24,labour,statcan,14-10-0019-01,2628030,"Labour force, some high school, 15 to 24",thousands,monthly,not adjusted
+edu_lf_somehs_25_44,labour,statcan,14-10-0019-01,2628210,"Labour force, some high school, 25 to 44",thousands,monthly,not adjusted
+edu_lf_somehs_25_54,labour,statcan,14-10-0019-01,2628390,"Labour force, some high school, 25 to 54",thousands,monthly,not adjusted
+edu_lf_somehs_55_64,labour,statcan,14-10-0019-01,2628570,"Labour force, some high school, 55 to 64",thousands,monthly,not adjusted
+edu_lf_hsgrad_15_24,labour,statcan,14-10-0019-01,2628031,"Labour force, high school graduate, 15 to 24",thousands,monthly,not adjusted
+edu_lf_hsgrad_25_44,labour,statcan,14-10-0019-01,2628211,"Labour force, high school graduate, 25 to 44",thousands,monthly,not adjusted
+edu_lf_hsgrad_25_54,labour,statcan,14-10-0019-01,2628391,"Labour force, high school graduate, 25 to 54",thousands,monthly,not adjusted
+edu_lf_hsgrad_55_64,labour,statcan,14-10-0019-01,2628571,"Labour force, high school graduate, 55 to 64",thousands,monthly,not adjusted
+edu_lf_someps_15_24,labour,statcan,14-10-0019-01,2628032,"Labour force, some postsecondary, 15 to 24",thousands,monthly,not adjusted
+edu_lf_someps_25_44,labour,statcan,14-10-0019-01,2628212,"Labour force, some postsecondary, 25 to 44",thousands,monthly,not adjusted
+edu_lf_someps_25_54,labour,statcan,14-10-0019-01,2628392,"Labour force, some postsecondary, 25 to 54",thousands,monthly,not adjusted
+edu_lf_someps_55_64,labour,statcan,14-10-0019-01,2628572,"Labour force, some postsecondary, 55 to 64",thousands,monthly,not adjusted
+edu_lf_pscert_15_24,labour,statcan,14-10-0019-01,2628033,"Labour force, postsecondary certificate or diploma, 15 to 24",thousands,monthly,not adjusted
+edu_lf_pscert_25_44,labour,statcan,14-10-0019-01,2628213,"Labour force, postsecondary certificate or diploma, 25 to 44",thousands,monthly,not adjusted
+edu_lf_pscert_25_54,labour,statcan,14-10-0019-01,2628393,"Labour force, postsecondary certificate or diploma, 25 to 54",thousands,monthly,not adjusted
+edu_lf_pscert_55_64,labour,statcan,14-10-0019-01,2628573,"Labour force, postsecondary certificate or diploma, 55 to 64",thousands,monthly,not adjusted
+edu_lf_bach_15_24,labour,statcan,14-10-0019-01,2628035,"Labour force, bachelor's degree, 15 to 24",thousands,monthly,not adjusted
+edu_lf_bach_25_44,labour,statcan,14-10-0019-01,2628215,"Labour force, bachelor's degree, 25 to 44",thousands,monthly,not adjusted
+edu_lf_bach_25_54,labour,statcan,14-10-0019-01,2628395,"Labour force, bachelor's degree, 25 to 54",thousands,monthly,not adjusted
+edu_lf_bach_55_64,labour,statcan,14-10-0019-01,2628575,"Labour force, bachelor's degree, 55 to 64",thousands,monthly,not adjusted
+edu_lf_abovebach_15_24,labour,statcan,14-10-0019-01,2628036,"Labour force, above bachelor's degree, 15 to 24",thousands,monthly,not adjusted
+edu_lf_abovebach_25_44,labour,statcan,14-10-0019-01,2628216,"Labour force, above bachelor's degree, 25 to 44",thousands,monthly,not adjusted
+edu_lf_abovebach_25_54,labour,statcan,14-10-0019-01,2628396,"Labour force, above bachelor's degree, 25 to 54",thousands,monthly,not adjusted
+edu_lf_abovebach_55_64,labour,statcan,14-10-0019-01,2628576,"Labour force, above bachelor's degree, 55 to 64",thousands,monthly,not adjusted
+edu_u_all_15_24,labour,statcan,14-10-0019-01,2628064,"Unemployed, all education levels, 15 to 24",thousands,monthly,not adjusted
+edu_u_all_25_44,labour,statcan,14-10-0019-01,2628244,"Unemployed, all education levels, 25 to 44",thousands,monthly,not adjusted
+edu_u_all_25_54,labour,statcan,14-10-0019-01,2628424,"Unemployed, all education levels, 25 to 54",thousands,monthly,not adjusted
+edu_u_all_55_64,labour,statcan,14-10-0019-01,2628604,"Unemployed, all education levels, 55 to 64",thousands,monthly,not adjusted
+edu_u_0_8_15_24,labour,statcan,14-10-0019-01,2628065,"Unemployed, 0 to 8 years of school, 15 to 24",thousands,monthly,not adjusted
+edu_u_0_8_25_44,labour,statcan,14-10-0019-01,2628245,"Unemployed, 0 to 8 years of school, 25 to 44",thousands,monthly,not adjusted
+edu_u_0_8_25_54,labour,statcan,14-10-0019-01,2628425,"Unemployed, 0 to 8 years of school, 25 to 54",thousands,monthly,not adjusted
+edu_u_0_8_55_64,labour,statcan,14-10-0019-01,2628605,"Unemployed, 0 to 8 years of school, 55 to 64",thousands,monthly,not adjusted
+edu_u_somehs_15_24,labour,statcan,14-10-0019-01,2628066,"Unemployed, some high school, 15 to 24",thousands,monthly,not adjusted
+edu_u_somehs_25_44,labour,statcan,14-10-0019-01,2628246,"Unemployed, some high school, 25 to 44",thousands,monthly,not adjusted
+edu_u_somehs_25_54,labour,statcan,14-10-0019-01,2628426,"Unemployed, some high school, 25 to 54",thousands,monthly,not adjusted
+edu_u_somehs_55_64,labour,statcan,14-10-0019-01,2628606,"Unemployed, some high school, 55 to 64",thousands,monthly,not adjusted
+edu_u_hsgrad_15_24,labour,statcan,14-10-0019-01,2628067,"Unemployed, high school graduate, 15 to 24",thousands,monthly,not adjusted
+edu_u_hsgrad_25_44,labour,statcan,14-10-0019-01,2628247,"Unemployed, high school graduate, 25 to 44",thousands,monthly,not adjusted
+edu_u_hsgrad_25_54,labour,statcan,14-10-0019-01,2628427,"Unemployed, high school graduate, 25 to 54",thousands,monthly,not adjusted
+edu_u_hsgrad_55_64,labour,statcan,14-10-0019-01,2628607,"Unemployed, high school graduate, 55 to 64",thousands,monthly,not adjusted
+edu_u_someps_15_24,labour,statcan,14-10-0019-01,2628068,"Unemployed, some postsecondary, 15 to 24",thousands,monthly,not adjusted
+edu_u_someps_25_44,labour,statcan,14-10-0019-01,2628248,"Unemployed, some postsecondary, 25 to 44",thousands,monthly,not adjusted
+edu_u_someps_25_54,labour,statcan,14-10-0019-01,2628428,"Unemployed, some postsecondary, 25 to 54",thousands,monthly,not adjusted
+edu_u_someps_55_64,labour,statcan,14-10-0019-01,2628608,"Unemployed, some postsecondary, 55 to 64",thousands,monthly,not adjusted
+edu_u_pscert_15_24,labour,statcan,14-10-0019-01,2628069,"Unemployed, postsecondary certificate or diploma, 15 to 24",thousands,monthly,not adjusted
+edu_u_pscert_25_44,labour,statcan,14-10-0019-01,2628249,"Unemployed, postsecondary certificate or diploma, 25 to 44",thousands,monthly,not adjusted
+edu_u_pscert_25_54,labour,statcan,14-10-0019-01,2628429,"Unemployed, postsecondary certificate or diploma, 25 to 54",thousands,monthly,not adjusted
+edu_u_pscert_55_64,labour,statcan,14-10-0019-01,2628609,"Unemployed, postsecondary certificate or diploma, 55 to 64",thousands,monthly,not adjusted
+edu_u_bach_15_24,labour,statcan,14-10-0019-01,2628071,"Unemployed, bachelor's degree, 15 to 24",thousands,monthly,not adjusted
+edu_u_bach_25_44,labour,statcan,14-10-0019-01,2628251,"Unemployed, bachelor's degree, 25 to 44",thousands,monthly,not adjusted
+edu_u_bach_25_54,labour,statcan,14-10-0019-01,2628431,"Unemployed, bachelor's degree, 25 to 54",thousands,monthly,not adjusted
+edu_u_bach_55_64,labour,statcan,14-10-0019-01,2628611,"Unemployed, bachelor's degree, 55 to 64",thousands,monthly,not adjusted
+edu_u_abovebach_15_24,labour,statcan,14-10-0019-01,2628072,"Unemployed, above bachelor's degree, 15 to 24",thousands,monthly,not adjusted
+edu_u_abovebach_25_44,labour,statcan,14-10-0019-01,2628252,"Unemployed, above bachelor's degree, 25 to 44",thousands,monthly,not adjusted
+edu_u_abovebach_25_54,labour,statcan,14-10-0019-01,2628432,"Unemployed, above bachelor's degree, 25 to 54",thousands,monthly,not adjusted
+edu_u_abovebach_55_64,labour,statcan,14-10-0019-01,2628612,"Unemployed, above bachelor's degree, 55 to 64",thousands,monthly,not adjusted
+emp_total_se_mm,labour,statcan,14-10-0355-01,101893653,"Employment, total, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_agri_se_mm,labour,statcan,14-10-0355-01,101893659,"Employment, agri, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_resources_se_mm,labour,statcan,14-10-0355-01,101893662,"Employment, resources, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_utilities_se_mm,labour,statcan,14-10-0355-01,101893665,"Employment, utilities, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_construction_se_mm,labour,statcan,14-10-0355-01,101893668,"Employment, construction, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_manufacturing_se_mm,labour,statcan,14-10-0355-01,101893671,"Employment, manufacturing, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_wholesale_se_mm,labour,statcan,14-10-0355-01,1643071244,"Employment, wholesale, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_retail_se_mm,labour,statcan,14-10-0355-01,1643071250,"Employment, retail, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_transport_se_mm,labour,statcan,14-10-0355-01,101893680,"Employment, transport, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_finance_se_mm,labour,statcan,14-10-0355-01,101893683,"Employment, finance, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_professional_se_mm,labour,statcan,14-10-0355-01,101893686,"Employment, professional, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_business_support_se_mm,labour,statcan,14-10-0355-01,101893689,"Employment, business support, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_education_se_mm,labour,statcan,14-10-0355-01,101893692,"Employment, education, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_health_se_mm,labour,statcan,14-10-0355-01,101893695,"Employment, health, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_info_culture_se_mm,labour,statcan,14-10-0355-01,101893698,"Employment, info culture, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_accommodation_food_se_mm,labour,statcan,14-10-0355-01,101893701,"Employment, accommodation food, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_other_services_se_mm,labour,statcan,14-10-0355-01,101893704,"Employment, other services, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_public_admin_se_mm,labour,statcan,14-10-0355-01,101893707,"Employment, public admin, standard error of the monthly change",thousands,monthly,seasonally adjusted
+emp_total_se_yy,labour,statcan,14-10-0355-01,101893654,"Employment, total, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_agri_se_yy,labour,statcan,14-10-0355-01,101893660,"Employment, agri, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_resources_se_yy,labour,statcan,14-10-0355-01,101893663,"Employment, resources, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_utilities_se_yy,labour,statcan,14-10-0355-01,101893666,"Employment, utilities, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_construction_se_yy,labour,statcan,14-10-0355-01,101893669,"Employment, construction, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_manufacturing_se_yy,labour,statcan,14-10-0355-01,101893672,"Employment, manufacturing, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_wholesale_se_yy,labour,statcan,14-10-0355-01,1643071245,"Employment, wholesale, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_retail_se_yy,labour,statcan,14-10-0355-01,1643071251,"Employment, retail, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_transport_se_yy,labour,statcan,14-10-0355-01,101893681,"Employment, transport, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_finance_se_yy,labour,statcan,14-10-0355-01,101893684,"Employment, finance, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_professional_se_yy,labour,statcan,14-10-0355-01,101893687,"Employment, professional, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_business_support_se_yy,labour,statcan,14-10-0355-01,101893690,"Employment, business support, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_education_se_yy,labour,statcan,14-10-0355-01,101893693,"Employment, education, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_health_se_yy,labour,statcan,14-10-0355-01,101893696,"Employment, health, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_info_culture_se_yy,labour,statcan,14-10-0355-01,101893699,"Employment, info culture, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_accommodation_food_se_yy,labour,statcan,14-10-0355-01,101893702,"Employment, accommodation food, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_other_services_se_yy,labour,statcan,14-10-0355-01,101893705,"Employment, other services, standard error of the 12-month change",thousands,monthly,seasonally adjusted
+emp_public_admin_se_yy,labour,statcan,14-10-0355-01,101893708,"Employment, public admin, standard error of the 12-month change",thousands,monthly,seasonally adjusted

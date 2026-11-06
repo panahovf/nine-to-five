@@ -1,0 +1,101 @@
+# Updates the data and publishes the page (the site/ folder) to GitHub Pages: panahovf.github.io/labour-monitor/
+#
+# Runs:
+#   - every weekday at 13:45 and 17:15 UTC (8:45 and 12:15 in Toronto in winter, an hour later in summer; Statistics
+#     Canada publishes at 8:30): downloads the series (step 1), rebuilds the page's data (step 2) and, if any number
+#     changed, commits site/data/labour.json and site/tile.json and publishes;
+#   - by hand: Actions tab -> "Update and publish" -> "Run workflow" (same as the weekday runs, and always publishes);
+#   - whenever something is pushed to main: publishes site/ as it is in the repository, without downloading.
+#
+# A run that fails (a download error, or a check in step 2 that stops it) changes nothing: the page keeps its last good
+# data, and GitHub emails the repository's owner.
+
+name: Update and publish
+
+on:
+  schedule:
+    - cron: "45 13 * * 1-5"
+    - cron: "15 17 * * 1-5"
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write      # to commit the new data
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      UPDATE: ${{ github.event_name != 'push' }}    # download and rebuild on the weekday and by-hand runs only
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        if: env.UPDATE == 'true'
+        with:
+          python-version: "3.9"
+          cache: pip
+
+      - name: Install what the notebooks need
+        if: env.UPDATE == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Download the Statistics Canada series (step 1)
+        if: env.UPDATE == 'true'
+        working-directory: data
+        run: jupyter nbconvert --to notebook --execute 01_fetch_statcan.ipynb --output-dir /tmp/runs --ExecutePreprocessor.timeout=600
+
+      - name: Build the page's data (step 2)
+        if: env.UPDATE == 'true'
+        working-directory: data
+        run: jupyter nbconvert --to notebook --execute 02_build_labour.ipynb --output-dir /tmp/runs --ExecutePreprocessor.timeout=600
+
+      # labour.json always gets a new "built_at" time; it counts as changed only if anything else in it changed.
+      - name: Did any number change?
+        id: check
+        if: env.UPDATE == 'true'
+        run: |
+          python - <<'EOF'
+          import json, os, subprocess
+          new = json.load(open("site/data/labour.json"))
+          old = json.loads(subprocess.run(["git", "show", "HEAD:site/data/labour.json"], capture_output=True, text=True, check=True).stdout)
+          new.pop("built_at", None); old.pop("built_at", None)
+          changed = new != old
+          print("New data:", new["updated"]["survey"], new["updated"]["month"]) if changed else print("Nothing changed.")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"changed={'true' if changed else 'false'}\n")
+          EOF
+
+      - name: Commit the new data
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data/labour.json site/tile.json
+          git commit -m "Data: $(python -c 'import json; u = json.load(open("site/data/labour.json"))["updated"]; print(u["survey"], u["month"])')"
+          git pull --rebase
+          git push
+
+      # Publish after a push, a run by hand, or new data; a weekday run with nothing new stops here.
+      - uses: actions/configure-pages@v5
+        id: pages
+        if: github.event_name != 'schedule' || steps.check.outputs.changed == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.pages.outcome == 'success'
+        with:
+          path: site
+
+      - id: deployment
+        if: steps.pages.outcome == 'success'
+        uses: actions/deploy-pages@v4

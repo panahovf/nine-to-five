@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- The preview picture shown when the page's link is shared (site/og.png): the page's question and the unemployment rate
+     since 1976. It shows no latest number, so it doesn't go out of date when new data come in. Data: site/data/labour.json.
+     Rendered at 1200 x 630, twice as sharp (2400 x 1260), by headless Chrome; the command is in the README. -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #fbfaf8; }
+  body { position: relative; font-family: "IBM Plex Sans", sans-serif; color: #14171c; }
+  .top { position: absolute; left: 56px; right: 56px; top: 34px; display: flex; justify-content: space-between; align-items: center; }
+  .brand { display: flex; align-items: center; gap: 12px; font-size: 27px; }
+  .brand .dot { width: 14px; height: 14px; border-radius: 50%; background: #2148cc; }
+  .brand b { font-weight: 600; }
+  .brand span.by { color: #6a727d; }
+  .note { font-size: 21px; color: #6a727d; letter-spacing: .02em; }
+  h1 { position: absolute; left: 56px; top: 96px; margin: 0; font: 700 62px/1.04 "Source Serif 4", serif; letter-spacing: -.03em; }
+  h1 span { color: #2148cc; }
+  svg { position: absolute; left: 0; top: 214px; }
+</style>
+</head>
+<body>
+  <div class="top"><div class="brand"><span class="dot"></span><b>Monitor</b><span class="by">by Farhad Panahov</span></div><div class="note">Labour market</div></div>
+  <h1>How healthy is Canada&rsquo;s <span>labour market?</span></h1>
+  <svg id="chart" width="1200" height="416"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script>
+const BLUE = "#2148cc", MUTED = "#6a727d", LINE = "#e7e3dc";
+const month = (s) => new Date(Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, 1));
+
+// the unemployment rate since 1976, from the page's first chart
+fetch("../site/data/labour.json").then((r) => r.json()).then((d) => {
+  const rows = d.sections[0].charts.find((c) => c.id === "unemployment").series[0].data.map(([m, v]) => ({ date: month(m), v }));
+  const svg = d3.select("#chart"), W = +svg.attr("width"), H = +svg.attr("height");
+  const m = { l: 112, r: 64, t: 46, b: 44 };
+  const x = d3.scaleUtc(d3.extent(rows, (r) => r.date), [m.l, W - m.r]);
+  const y = d3.scaleLinear([0, 16], [H - m.b, m.t]);
+  for (const t of [0, 4, 8, 12, 16]) {
+    svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(t)).attr("y2", y(t)).attr("stroke", LINE).attr("stroke-width", 1.5);
+    svg.append("text").attr("x", m.l - 14).attr("y", y(t)).attr("dy", "0.35em").attr("text-anchor", "end")
+      .attr("font-size", 19).attr("fill", MUTED).text(t + "%");
+  }
+  for (const yr of [1980, 1990, 2000, 2010, 2020]) {
+    svg.append("text").attr("x", x(new Date(Date.UTC(yr, 0, 1)))).attr("y", H - 12).attr("text-anchor", "middle")
+      .attr("font-size", 19).attr("fill", MUTED).text(yr);
+  }
+  svg.append("text").attr("x", m.l - 54).attr("y", 16).attr("text-anchor", "start")
+    .attr("font-size", 19).attr("fill", MUTED).text("Unemployment rate since 1976");
+  svg.append("path").attr("d", d3.line((r) => x(r.date), (r) => y(r.v))(rows))
+    .attr("fill", "none").attr("stroke", BLUE).attr("stroke-width", 3.2).attr("stroke-linejoin", "round");
+  const last = rows[rows.length - 1];
+  svg.append("circle").attr("cx", x(last.date)).attr("cy", y(last.v)).attr("r", 6).attr("fill", BLUE);
+});
+</script>
+</body>
+</html>

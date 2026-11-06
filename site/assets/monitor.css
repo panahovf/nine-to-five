@@ -1,0 +1,284 @@
+/* ============================================================
+   The monitor: only what the portfolio stylesheet doesn't cover.
+   Fonts, colours, top bar, page head and footer come from
+   https://panahovf.github.io/assets/css/style.css
+   ============================================================ */
+
+:root {
+  --line-dk: #cdc8bf;
+  /* chart colours (validated together for colour-blind separation and contrast on --paper) */
+  --c-main: #2148cc;
+  --c-second: #c8571f;
+  --c-third: #13896f;
+  --c-context: #858c96;
+}
+[hidden] { display: none !important; }
+.num { font-variant-numeric: tabular-nums; }
+button { font: inherit; color: inherit; }
+
+/* header: "[Name]" then "by Farhad Panahov" (back to the portfolio) */
+.brand a:hover { text-decoration: none; }
+.brand .first a { color: var(--ink); }
+.brand .by { color: var(--muted); }
+.brand .by:hover { color: var(--ink); }
+
+/* page head */
+.crumb { display: inline-block; font-size: .84rem; color: var(--muted); margin-bottom: 18px; }
+.crumb:hover { color: var(--ink); }
+.pagehead .label { margin-bottom: 14px; }
+.pagehead .updated { margin-top: 14px; font-size: .9rem; }
+.pagehead .updated b { color: var(--ink); font-weight: 600; }
+
+/* ---------- where things stand: stat tiles ---------- */
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.tile-stat {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0;
+}
+.tile-stat .k { font-size: .72rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+.tile-stat .v { font: 700 2.1rem/1.1 var(--display); letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums lining-nums; }
+.tile-stat .d { font-size: .84rem; color: var(--muted); line-height: 1.4; }
+.tile-stat svg { margin-top: 8px; display: block; }
+
+/* ---------- what changed ---------- */
+.band-sm { padding: 44px 0 8px; }
+.h2 {
+  font-family: var(--display); font-weight: 700; font-size: 1.65rem; letter-spacing: -.03em;
+  margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--ink);
+  display: flex; align-items: baseline; gap: 14px;
+}
+.h2 .n { font-family: var(--sans); font-size: .78rem; font-weight: 500; letter-spacing: .14em; color: var(--faint); }
+.changes { margin: 0; padding-left: 20px; max-width: 78ch; }
+.changes li { color: var(--ink-soft); margin-bottom: 9px; }
+
+/* ---------- controls: section jump links + time range ---------- */
+/* the section links and the time range follow the reader down the page: the row sticks to the top of the window
+   (full width of the page, so charts scroll underneath it); monitor.js adds .stuck for the shadow */
+.controls { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 14px;
+            margin: 28px calc(-1 * var(--pad)) 0; padding: 10px var(--pad); background: var(--paper);
+            transition: box-shadow .16s ease; }
+.controls.stuck { box-shadow: 0 1px 0 var(--line), 0 8px 18px rgba(20,23,28,.06); }
+.jump { display: flex; flex-wrap: nowrap; gap: 6px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.jump::-webkit-scrollbar { display: none; }
+.jump a { white-space: nowrap; }
+.jump a[aria-current] { background: var(--ink); color: #fff; }
+.jump a { font-size: .82rem; color: var(--ink-soft); background: var(--wash); border-radius: 999px; padding: 7px 14px; }
+.jump a:hover { text-decoration: none; background: #e9e6e0; color: var(--ink); }
+.range { display: inline-flex; background: var(--wash); border-radius: 999px; padding: 4px; gap: 2px; }
+.range span { font-size: .78rem; color: var(--muted); padding: 0 8px 0 10px; align-self: center; }
+.range button { border: 0; background: none; border-radius: 999px; padding: 6px 13px; font-size: .8rem; font-weight: 500; color: var(--ink-soft); cursor: pointer; }
+.range button:hover { background: rgba(255,255,255,.75); color: var(--ink); }
+.range button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+/* ---------- chart sections ---------- */
+.group { padding: 40px 0 10px; scroll-margin-top: 56px; }   /* (room for the sticky controls row) */
+/* side-by-side cards share the height of the taller one; a wide card takes the full row
+   (monitor.js marks a card wide when its chart asks for it, or when it is left without a partner) */
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
+.grid > .card.wide { grid-column: 1 / -1; }
+.card {
+  background: var(--white); border: 1px solid var(--line); border-radius: 14px;
+  padding: 22px 22px 16px; min-width: 0; display: flex; flex-direction: column;
+}
+.card h3 { font-family: var(--display); font-size: 1.22rem; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; margin: 0 0 8px; }
+.card .reading { font-size: .92rem; color: var(--ink-soft); line-height: 1.55; margin: 0 0 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 6px; font-size: .78rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { display: inline-block; width: 16px; height: 2px; border-radius: 1px; }
+.legend i.dot, .tip .r i.dot { width: 9px; height: 9px; border-radius: 50%; }
+.legend i.ring, .tip .r i.ring { width: 9px; height: 9px; border-radius: 50%; background: var(--white) !important; border: 1.5px solid var(--c-context); }
+.legend i.sq, .tip .r i.sq { width: 10px; height: 10px; border-radius: 2px; }
+.legend i.none { display: none; }
+.legend-sm { font-size: .74rem; margin: 2px 0 0; }
+.panel-label { font-size: .74rem; font-weight: 500; color: var(--ink-soft); margin: 14px 0 4px; padding-top: 10px; border-top: 1px dashed var(--line); }
+.plot { position: relative; outline: none; border-radius: 6px; margin-bottom: 14px; }
+.plot:focus-visible { box-shadow: 0 0 0 3px rgba(33,72,204,.25); }
+.plot svg { display: block; overflow: visible; }
+.card .foot { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--line); font-size: .76rem; color: var(--faint); line-height: 1.5; }
+.card .foot a { color: var(--muted); text-decoration: underline; text-decoration-color: var(--line-dk); text-underline-offset: 2px; }
+.card .foot a:hover { color: var(--accent); }
+
+/* tooltip (one per chart) */
+.tip {
+  position: absolute; pointer-events: none; z-index: 5; min-width: 150px;
+  background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+  box-shadow: 0 6px 22px rgba(20,23,28,.10); padding: 9px 12px; font-size: .78rem;
+}
+.tip .t { color: var(--muted); margin-bottom: 4px; }
+.tip .r { display: flex; align-items: center; gap: 8px; white-space: nowrap; line-height: 1.7; }
+.tip .r i { width: 12px; height: 2px; border-radius: 1px; flex: none; }
+.tip .r b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.tip .r span { color: var(--muted); }
+
+/* horizontal bars (diverging around zero), built in HTML so labels wrap on phones */
+.bars { display: flex; flex-direction: column; gap: 5px; margin-top: 4px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 1fr) 52px; align-items: center; gap: 10px; font-size: .78rem; border-radius: 4px; }
+.bar-row:hover { background: var(--wash); }
+.bar-label { color: var(--ink-soft); line-height: 1.25; }
+.bar-track { position: relative; height: 14px; }
+.bar-track .zero { position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--faint); }
+.bar-track .bar { position: absolute; top: 0; bottom: 0; }
+.bar-track .bar.pos { background: var(--c-main); border-radius: 0 4px 4px 0; }
+.bar-track .bar.neg { background: var(--c-second); border-radius: 4px 0 0 4px; }
+.bar-track .bar.dim { background: var(--c-context); }        /* the other rows, when one row is highlighted */
+.bar-val { text-align: right; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bar-row.hl .bar-label, .bar-row.hl .bar-val { color: var(--ink); font-weight: 600; }
+
+/* data & methods */
+.methods { padding: 46px 0 70px; }
+.methods p, .methods li { color: var(--muted); font-size: .92rem; max-width: 78ch; }
+.methods ul { padding-left: 20px; }
+
+/* ---------- front page: topic tiles ---------- */
+.topics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-bottom: 30px; }
+/* exactly four topics: two by two, not three and one left over (narrower screens are two or one across anyway) */
+@media (min-width: 1041px) {
+  .topics:has(> .topic:nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* and exactly two: side by side, half the width each */
+  .topics:has(> .topic:nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.topic {
+  display: flex; flex-direction: column; gap: 8px; min-height: 250px; color: inherit;
+  background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px;
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+a.topic:hover { text-decoration: none; border-color: var(--line-dk); box-shadow: 0 8px 26px rgba(20,23,28,.07); }
+.topic .k { font-size: .72rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.topic h2 { font-family: var(--display); font-size: 1.45rem; font-weight: 700; letter-spacing: -.025em; line-height: 1.15; margin: 0; }
+.topic .stat { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+.topic .v { font: 700 2.2rem/1 var(--display); letter-spacing: -.02em; font-variant-numeric: tabular-nums lining-nums; }
+.topic .l { font-size: .84rem; color: var(--muted); margin-top: 4px; }
+.topic .when { font-size: .78rem; color: var(--faint); border-top: 1px solid var(--line); padding-top: 10px; }
+.topic.soon { background: transparent; border-style: dashed; }
+.topic.soon .k { color: var(--faint); }
+.topic.soon h2 { color: var(--muted); }
+.topic.soon .when { margin-top: auto; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1040px) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid { grid-template-columns: 1fr; }
+  .topics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .tiles { gap: 10px; }
+  .tile-stat { padding: 14px 14px 12px; }
+  .tile-stat .v { font-size: 1.65rem; }
+  .card { padding: 18px 16px 14px; }
+  .topics { grid-template-columns: 1fr; }
+  .topic { min-height: 0; }
+  .bar-row { grid-template-columns: minmax(0, 1fr) 48px; }
+  .bar-label { grid-column: 1 / -1; }
+}
+
+/* ---------- labour page (2026-10-28): in-card toggles, compare / bars_multi / cohort charts ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; background: var(--wash); border-radius: 999px; padding: 3px; gap: 2px; margin: 0 0 10px; }
+.seg-tabs { border-radius: 14px; }
+.seg button { border: 0; background: none; border-radius: 999px; padding: 5px 11px; font-size: .75rem; font-weight: 500; color: var(--ink-soft); cursor: pointer; }
+.seg button:hover { background: rgba(255,255,255,.75); color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.panel-label { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.panel-label .seg { margin: 0; }
+.plot-inner { position: relative; outline: none; border-radius: 6px; }
+.plot-inner:focus-visible { box-shadow: 0 0 0 3px rgba(33,72,204,.25); }
+.legend i.tick { width: 3px; height: 13px; border-radius: 1px; }
+.legend i.sq.faint, .bar-track .bar.faint { opacity: .3; }
+.faint-text { color: var(--faint) !important; }
+
+/* bars in columns: label, then one column per period; each row is its own grid, so a hover can light the whole row */
+.bm { font-size: .78rem; }
+.bm-row { display: grid; grid-template-columns: minmax(150px, 1.15fr) repeat(var(--cols), minmax(0, 1fr)); column-gap: 36px;
+  align-items: center; padding: 3px 8px; border-radius: 5px; }
+.bm-row + .bm-row { margin-top: 2px; }
+.bm-headrow { align-items: end; padding-bottom: 7px; border-bottom: 1px solid var(--line); border-radius: 0; margin-bottom: 3px; }
+.bm-corner { color: var(--faint); font-size: .72rem; }
+.bm-head { font: inherit; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; border-radius: 4px; }
+.bm-head b { display: block; font-weight: 600; color: var(--ink-soft); }
+.bm-head span { color: var(--faint); font-size: .72rem; }
+.bm-head:hover b, .bm-head.on b { color: var(--accent); }
+.bm-head:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(33,72,204,.25); }
+.bm-label { color: var(--ink-soft); line-height: 1.25; }
+.bm-row.total { border-bottom: 1px solid var(--line); border-radius: 5px 5px 0 0; padding-bottom: 7px; margin-bottom: 4px; }
+.bm-row.total .bm-label, .bm-row.total .bar-val { color: var(--ink); font-weight: 600; }
+.bm-row:not(.bm-headrow):hover { background: var(--wash); }
+.bm-row:not(.bm-headrow):hover .bm-label { color: var(--ink); }
+.bm-cell { display: grid; grid-template-columns: minmax(0, 1fr) 46px; gap: 8px; align-items: center; }
+/* statistically significant: a dark outline, with a thin gap so it reads on the blue and the orange alike */
+.bar-track .bar.sig, .legend i.sq.sig { box-shadow: 0 0 0 1px var(--white), 0 0 0 2.5px var(--ink); }
+/* (set by monitor.js from the card's own width, not the window's) */
+.bm.bm-narrow .bm-row { grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); column-gap: 22px; padding: 3px 6px; }
+.bm-narrow .bm-corner { display: none; }
+.bm-narrow .bm-label { grid-column: 1 / -1; margin: 3px 0 1px; }
+.bm-narrow .bm-cell { grid-template-columns: minmax(0, 1fr) 40px; gap: 6px; }
+
+/* the time range never wraps or shrinks; on phones its "Show" label goes */
+.controls .range { flex: none; }
+@media (max-width: 560px) { .controls .range span { display: none; } .controls { gap: 8px; } }
+.tip .r i.tick, .legend i.tick { width: 2px; height: 12px; border-radius: 1px; }
+.jump.more { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+
+/* a little more room between a chart and the panel under it; a reading may hold a line break ("\n" in the data) */
+.panel-label { margin-top: 22px; padding-top: 12px; }
+.card .reading { white-space: pre-line; }
+.tip .r i.none { display: none; }
+/* a reading in separate lines; "up" (pushed a rate up) warm and "down" (pulled it down) cool, both readable on white */
+.card .reading .line { display: block; }
+.card .reading .lab { font-weight: 600; }
+.card .reading .tone-up .lab { color: #a8430f; }
+.card .reading .tone-down .lab { color: #1d4fbf; }
+
+/* who is unemployed: two grids (rate, percentile) and a heat map over time. Grids: "All" column and "All ages" row first,
+   each set apart by a thin gap; a lit-up group (hovered here or in the heat map) gets a dark ring */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+@media (max-width: 860px) { .pair { grid-template-columns: 1fr; } }
+.pair h4 { font: 600 .86rem/1.3 var(--sans); color: var(--ink); margin: 0 0 2px; }
+.pair .sub { font-size: .76rem; color: var(--muted); margin: 0 0 10px; }
+.hm { display: grid; grid-template-columns: minmax(58px, .8fr) minmax(0, 1fr) 4px repeat(4, minmax(0, 1fr)); gap: 4px; font-size: .78rem; }
+.hm-h { align-self: end; color: var(--muted); font-size: .7rem; line-height: 1.25; padding: 0 1px 4px; }
+.hm-h.all { color: var(--ink); font-weight: 600; }
+.hm-row { align-self: center; color: var(--ink-soft); line-height: 1.2; }
+.hm-row.all { color: var(--ink); font-weight: 600; }
+.hm-row.all span { display: block; font-weight: 400; font-size: .68rem; color: var(--muted); }
+.hm .first { margin-bottom: 5px; }
+.hm-cell { border-radius: 6px; min-height: 40px; display: flex; align-items: center; justify-content: center; font-weight: 600;
+           font-size: .86rem; font-variant-numeric: tabular-nums; cursor: default; transition: box-shadow .12s; }
+.hm-cell.on { box-shadow: 0 0 0 2px var(--ink); }
+.hm-cell.small { background: repeating-linear-gradient(135deg, #f4f2ee 0 5px, #e6e2db 5px 6px); }
+@media (max-width: 560px) {
+  .hm { grid-template-columns: 46px minmax(0, 1fr) 2px repeat(4, minmax(0, 1fr)); gap: 3px; }
+  .hm-h { font-size: .62rem; }
+  .hm-cell { min-height: 34px; font-size: .74rem; border-radius: 5px; }
+}
+/* stepped colour key: equal segments with some boundaries labelled under them; the "too few" hatch beside it */
+.step-key { display: flex; align-items: flex-start; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: .72rem; color: var(--muted); }
+.step-key .steps { width: 280px; max-width: 100%; }
+.step-key .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; gap: 1px; }
+.step-key .bar i { flex: 1; }
+.step-key .ticks { position: relative; height: 15px; margin-top: 3px; font-variant-numeric: tabular-nums; }
+.step-key .ticks span { position: absolute; transform: translateX(-50%); }
+.step-key .ends { display: flex; justify-content: space-between; margin-top: 1px; }
+.step-key .hatch { display: inline-block; width: 12px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-right: 5px;
+                   background: repeating-linear-gradient(135deg, #f4f2ee 0 3px, #ddd9d2 3px 4px); }
+/* a tooltip that follows the pointer (grids and heat maps) */
+.tip.float { position: fixed; z-index: 60; max-width: 290px; }
+.tip.float .t { color: var(--ink); font-weight: 600; }
+.tip.float .l { color: var(--ink-soft); line-height: 1.55; }
+.tip.float .l b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* data and methods as a fold-out (as on Budget Galaxy): closed until clicked, plain paragraphs across the page.
+   (Only pages whose methods sit in a <details> get it; the others keep their heading and list.) */
+.methods details { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.methods summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 16px 0; }
+.methods summary::-webkit-details-marker { display: none; }
+.methods summary .open { margin: 0; font: 400 .8rem/1.4 var(--sans); letter-spacing: 0; color: var(--muted); white-space: nowrap; }
+.methods summary .open::after { content: " +"; font-size: 1.05rem; }
+.methods details[open] summary .open::after { content: " \2013"; }
+.methods summary:hover .open { color: var(--ink); }
+.methods .mbody { padding: 2px 0 12px; }
+.methods .mbody p { max-width: none; margin: 0 0 16px; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+.methods .mbody p b { color: var(--ink); font-weight: 600; }
+.methods .mbody a { color: var(--ink-soft); text-decoration: underline; text-decoration-color: var(--line-dk); text-underline-offset: 2px; }
+.methods .mbody a:hover { color: var(--accent); }
+
+/* a tile's number can carry a small word after it ("5 provinces") */
+.tile-stat .v .u { font: 500 .95rem/1 var(--sans); letter-spacing: 0; color: var(--ink-soft); }
