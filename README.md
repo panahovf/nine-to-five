@@ -42,12 +42,13 @@ to the Monitor front page (`/monitor/`) work only online.
 
 GitHub publishes the page (Settings → Pages → Source: GitHub Actions) with `.github/workflows/publish.yml`:
 
-- Every weekday at 8:35 Toronto time (Statistics Canada publishes at 8:30), with a later try at 10:35, it first asks
-  Statistics Canada whether any of the page's tables got new data that day: `tools/released_today.py` reads the Web Data
-  Service's daily list of changed tables (`getChangedCubeList`) and compares it with `series.csv`. On a day with no
-  release it stops there, after a second or two. On a release day it runs steps 1 and 2; if any number changed, it
-  commits the new `site/data/labour.json` and `site/tile.json` and publishes. If a step fails, nothing changes and the
-  page keeps its last good data.
+- Every weekday at 8:35 Toronto time (Statistics Canada publishes at 8:30), and again every hour until mid-afternoon (GitHub
+  sometimes starts a scheduled run late, or not at all), it first asks Statistics Canada whether any of the page's tables
+  got new data that day: `tools/released_today.py` reads the Web Data Service's daily list of changed tables
+  (`getChangedCubeList`), compares it with `series.csv`, and checks whether the page was already rebuilt after that
+  release. If not, it runs steps 1 and 2; if any number changed, it commits the new `site/data/labour.json` and
+  `site/tile.json` and publishes. Otherwise it stops there, after a second or two. If a step fails, nothing changes and
+  the page keeps its last good data.
 - Every Saturday it runs steps 1 and 2 whatever the list says, as a safety net (a correction, or a release the check
   missed).
 - On every push to `main`, it publishes `site/` as it is in the repository.

@@ -1,10 +1,11 @@
 # Updates the data and publishes the page (the site/ folder) to GitHub Pages: panahovf.github.io/nine-to-five/
 #
 # Runs:
-#   - every weekday at 8:35 Toronto time (Statistics Canada publishes at 8:30), with a later try at 10:35: first asks
-#     Statistics Canada whether any of the page's tables got new data today (tools/released_today.py, a second or
-#     two). Only if one did: downloads the series (step 1), rebuilds the page's data (step 2) and, if any number
-#     changed, commits site/data/labour.json and site/tile.json and publishes. Otherwise it stops there;
+#   - every weekday at 8:35 Toronto time (Statistics Canada publishes at 8:30), then again every hour until mid-afternoon
+#     (GitHub sometimes starts a scheduled run late, or not at all): first asks Statistics Canada whether any of the
+#     page's tables got new data today that the page doesn't have yet (tools/released_today.py, a second or two). Only
+#     if one did: downloads the series (step 1), rebuilds the page's data (step 2) and, if any number changed, commits
+#     site/data/labour.json and site/tile.json and publishes. Otherwise it stops there;
 #   - every Saturday: the full update whatever the list says, as a safety net (a release the check missed, a correction);
 #   - by hand: Actions tab -> "Update and publish" -> "Run workflow" (the full update, and always publishes);
 #   - whenever something is pushed to main: publishes site/ as it is in the repository, without downloading.
@@ -16,11 +17,10 @@ name: Update and publish
 
 on:
   schedule:
-    # GitHub's schedule is in UTC: 8:35 Toronto is 13:35 UTC in winter and 12:35 UTC in summer, so both are here (the
-    # one an hour early finds nothing released yet and stops; the one an hour late finds the page already up to date)
-    - cron: "35 12 * * 1-5"
-    - cron: "35 13 * * 1-5"
-    - cron: "35 15 * * 1-5"      # 10:35 in winter, 11:35 in summer: in case GitHub started the first run late
+    # GitHub's schedule is in UTC: every hour at :35 from 12:35 to 20:35 UTC, i.e. 7:35 to 15:35 in Toronto in winter and
+    # 8:35 to 16:35 in summer. A run before 8:30 finds nothing released yet; once the page has the day's release, the
+    # later runs stop at the check.
+    - cron: "35 12-20 * * 1-5"
     - cron: "0 14 * * 6"         # Saturdays at 9:00 or 10:00: the full update, whatever the list says
   workflow_dispatch:
   push:
@@ -37,7 +37,7 @@ concurrency:
 
 jobs:
   update-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04      # (it still offers Python 3.9, which the notebooks' pinned versions need; ubuntu-latest no longer does)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
